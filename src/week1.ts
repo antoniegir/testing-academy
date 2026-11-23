@@ -34,7 +34,11 @@ export function classifyStatus(status: number): StatusGroup {
 //   { "postId": 1, "id": 1, "name": "id labore ...", "email": "Eliseo@gardner.biz", "body": "laudantium ..." }
 // ---------------------------------------------------------------------------
 export interface Comment {
-  // TODO: add the 5 fields with the correct types
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
 }
 
 // ---------------------------------------------------------------------------

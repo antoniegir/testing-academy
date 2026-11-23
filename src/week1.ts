@@ -55,7 +55,11 @@ export function isValidEmail(email: string): boolean {
 // Throw an Error if the response is not ok.
 // ---------------------------------------------------------------------------
 export async function getComments(postId: number): Promise<Comment[]> {
-  throw new Error('TODO');
+  const res = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
+  if (!res.ok) {
+    throw new Error(`Request failed: ${res.status}`);
+  }
+  return await res.json();
 }
 
 // ---------------------------------------------------------------------------

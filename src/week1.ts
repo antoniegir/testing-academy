@@ -46,7 +46,7 @@ export interface Comment {
 // Return true if `email` looks valid: something@something.something, no spaces.
 // ---------------------------------------------------------------------------
 export function isValidEmail(email: string): boolean {
-  throw new Error('TODO');
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 // ---------------------------------------------------------------------------

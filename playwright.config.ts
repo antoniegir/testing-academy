@@ -16,6 +16,10 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'], baseURL: 'https://demo.playwright.dev' },
     },
     {
+      name: 'week1',
+      testDir: './tests/week1',
+    },
+    {
       name: 'api',
       testDir: './tests/api',
       use: { baseURL: 'https://jsonplaceholder.typicode.com' },

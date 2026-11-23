@@ -5,14 +5,15 @@
   "description": "Hands-on practice: Postman, locators, TypeScript, Playwright, Git, AI in QA",
   "scripts": {
     "test": "playwright test",
-    "test:ui": "playwright test tests/ui",
-    "test:api": "playwright test tests/api",
+    "test:ui": "playwright test --project=ui",
+    "test:api": "playwright test --project=api",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "report": "playwright show-report",
     "codegen": "playwright codegen https://demo.playwright.dev/todomvc",
     "ts:basics": "npx tsx src/ts-basics.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:week1": "playwright test --project=week1"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.1",

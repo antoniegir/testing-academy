@@ -15,7 +15,16 @@
 export type StatusGroup = 'success' | 'client-error' | 'server-error' | 'other';
 
 export function classifyStatus(status: number): StatusGroup {
-  throw new Error('TODO');
+  if (status >= 200 && status <= 299) {
+    return 'success';
+  }
+  if (status >= 400 && status <= 499) {
+    return 'client-error';
+  }
+  if (status >= 500 && status <= 599) {
+    return 'server-error';
+  }
+  return 'other';
 }
 
 // ---------------------------------------------------------------------------

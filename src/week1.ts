@@ -6,7 +6,6 @@
  * Tip: hover over a type in your editor (VS Code) to see what TypeScript knows about it.
  */
 
-import { count } from "node:console";
 
 // ---------------------------------------------------------------------------
 // Exercise 1: Union types
@@ -87,7 +86,14 @@ export function countByUser(items: { userId: number }[]): Record<number, number>
 // Use a private counter field.
 // ---------------------------------------------------------------------------
 export class UserFactory {
+  private count = 0;
+
   next(): { username: string; email: string } {
-    throw new Error('TODO');
+    this.count = this.count + 1;
+    const username = `user_${this.count}`;
+    return {
+      username: username,
+      email: `${username}@test.com`,
+    };
   }
 }

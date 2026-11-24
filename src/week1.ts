@@ -6,6 +6,8 @@
  * Tip: hover over a type in your editor (VS Code) to see what TypeScript knows about it.
  */
 
+import { count } from "node:console";
+
 // ---------------------------------------------------------------------------
 // Exercise 1: Union types
 // A test often needs to know if an HTTP status code means success.
@@ -68,7 +70,13 @@ export async function getComments(postId: number): Promise<Comment[]> {
 // Example: [{userId:1},{userId:1},{userId:2}]  ->  { 1: 2, 2: 1 }
 // ---------------------------------------------------------------------------
 export function countByUser(items: { userId: number }[]): Record<number, number> {
-  throw new Error('TODO');
+  const counts: Record<number, number> = {}; 
+
+  for (const item of items) {
+    counts[item.userId] = (counts[item.userId] ?? 0) + 1;
+  }
+
+  return counts;
 }
 
 // ---------------------------------------------------------------------------

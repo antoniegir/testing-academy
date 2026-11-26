@@ -250,7 +250,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "const comments = pm.response.json();          // the body as a JS array\n//The status is 200.\npm.test('Status is 200', () => {\n    pm.response.to.have.status(200);\n});\n\n// It returns exactly 5 comments.\npm.test('Response returns exactly 5 records', () => pm.expect(pm.response.json()).to.have.lengthOf(5));\n\n// Every comment has postId equal to 1.\npm.test('Every comment has postId equal to 1', () => {\n  pm.response.json().forEach(p => pm.expect(p.postId).to.eql(1));\n});\n\n// Every comment’s email looks valid.\npm.test('Every comment’s email looks valid', () => {\n  pm.response.json().forEach(p => pm.expect(p.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/));\n});\n"
+              "const comments = pm.response.json();          // the body as a JS array\n//The status is 200.\npm.test('Status is 200', () => {\n    pm.response.to.have.status(200);\n});\n\n// It returns exactly 5 comments.\npm.test('Response returns exactly 5 records', () => pm.expect(comments).to.have.lengthOf(5));\n\n// Every comment has postId equal to 1.\npm.test('Every comment has postId equal to 1', () => {\n  comments.forEach(p => pm.expect(p.postId).to.eql(1));\n});\n\n// Every comment’s email looks valid.\npm.test('Every comment’s email looks valid', () => {\n  comments.forEach(p => pm.expect(p.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/));\n});\n"
             ]
           }
         }

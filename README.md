@@ -16,8 +16,6 @@
 | AI literacy with sound judgment | all (`ai-prompts/`) |
 | *Nice to have:* performance testing, observability (Sentry/Grafana), Ruby on Rails | 7 |
 
-**Honest note:** "7+ years" and "mentoring experience" can't be fast-tracked. A portfolio that shows senior-level *engineering* (clean architecture, CI, strategy) is what gets a less-experienced candidate an interview.
-
 ---
 
 ## Setup (once)

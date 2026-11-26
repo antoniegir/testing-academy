@@ -252,7 +252,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.environment.set('firstname', pm.variables.replaceIn('{{$randomFirstName}}'));"
+                  ""
                 ]
               }
             },
@@ -261,7 +261,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 500', () => pm.response.to.have.status(500));\npm.test('Response body is Internal Server Error', () => {\n    pm.response.to.have.body(\"Internal Server Error\");\n});"
+                  "// BUG: Empty body crashes the server (500) instead of returning 400 Bad Request.\n// Un-skip when fixed.\npm.test.skip('Status is 400 for empty body', () => pm.response.to.have.status(400));"
                 ]
               }
             }

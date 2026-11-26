@@ -1,84 +1,286 @@
 {
   "info": {
+    "_postman_id": "a1c2d833-2c83-4f53-8389-0705c86cefa0",
     "name": "QA Academy - JSONPlaceholder",
     "description": "Import into Postman (File > Import). Run with Collection Runner or: npx newman run postman/QA-Academy.postman_collection.json",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "60420939",
+    "_collection_link": "https://go.postman.co/collection/60420939-a1c2d833-2c83-4f53-8389-0705c86cefa0?source=collection_link"
   },
-  "variable": [
-    { "key": "baseUrl", "value": "https://jsonplaceholder.typicode.com" },
-    { "key": "createdPostId", "value": "" }
-  ],
   "item": [
     {
       "name": "GET all posts",
-      "event": [{ "listen": "test", "script": { "exec": [
-        "pm.test('Status is 200', () => pm.response.to.have.status(200));",
-        "pm.test('Response time < 2000ms', () => pm.expect(pm.response.responseTime).to.be.below(2000));",
-        "pm.test('Returns 100 posts', () => pm.expect(pm.response.json()).to.have.lengthOf(100));"
-      ] } }],
-      "request": { "method": "GET", "url": "{{baseUrl}}/posts" }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+              "pm.test('Response time < 2000ms', () => pm.expect(pm.response.responseTime).to.be.below(2000));",
+              "pm.test('Returns 100 posts', () => pm.expect(pm.response.json()).to.have.lengthOf(100));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
     },
     {
       "name": "GET single post (schema check)",
-      "event": [{ "listen": "test", "script": { "exec": [
-        "const schema = { type: 'object', required: ['userId','id','title','body'], properties: { userId:{type:'number'}, id:{type:'number'}, title:{type:'string'}, body:{type:'string'} } };",
-        "pm.test('Status is 200', () => pm.response.to.have.status(200));",
-        "pm.test('Matches JSON schema', () => pm.response.to.have.jsonSchema(schema));",
-        "pm.test('id is 1', () => pm.expect(pm.response.json().id).to.eql(1));"
-      ] } }],
-      "request": { "method": "GET", "url": "{{baseUrl}}/posts/1" }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const schema = { type: 'object', required: ['userId','id','title','body'], properties: { userId:{type:'number'}, id:{type:'number'}, title:{type:'string'}, body:{type:'string'} } };",
+              "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+              "pm.test('Matches JSON schema', () => pm.response.to.have.jsonSchema(schema));",
+              "pm.test('id is 1', () => pm.expect(pm.response.json().id).to.eql(1));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      },
+      "response": []
     },
     {
       "name": "GET posts by userId (query param)",
-      "event": [{ "listen": "test", "script": { "exec": [
-        "pm.test('All posts belong to user 2', () => {",
-        "  pm.response.json().forEach(p => pm.expect(p.userId).to.eql(2));",
-        "});"
-      ] } }],
-      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/posts?userId=2", "host": ["{{baseUrl}}"], "path": ["posts"], "query": [{ "key": "userId", "value": "2" }] } }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('All posts belong to user 2', () => {\n  pm.response.json().forEach(p => pm.expect(p.userId).to.eql(2));\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts?userId=2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
     },
     {
       "name": "POST create post (saves id to variable)",
-      "event": [{ "listen": "test", "script": { "exec": [
-        "pm.test('Status is 201 Created', () => pm.response.to.have.status(201));",
-        "const json = pm.response.json();",
-        "pm.test('Title echoed back', () => pm.expect(json.title).to.eql('QA Academy'));",
-        "pm.collectionVariables.set('createdPostId', json.id);"
-      ] } }],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 201 Created', () => pm.response.to.have.status(201));",
+              "const json = pm.response.json();",
+              "pm.test('Title echoed back', () => pm.expect(json.title).to.eql('QA Academy'));",
+              "pm.collectionVariables.set('createdPostId', json.id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "body": { "mode": "raw", "raw": "{\n  \"title\": \"QA Academy\",\n  \"body\": \"Created from Postman\",\n  \"userId\": 1\n}" },
-        "url": "{{baseUrl}}/posts"
-      }
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"QA Academy\",\n  \"body\": \"Created from Postman\",\n  \"userId\": 1\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/posts",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
     },
     {
       "name": "PATCH update title",
-      "event": [{ "listen": "test", "script": { "exec": [
-        "pm.test('Status is 200', () => pm.response.to.have.status(200));",
-        "pm.test('Title updated', () => pm.expect(pm.response.json().title).to.eql('Patched'));"
-      ] } }],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+              "pm.test('Title updated', () => pm.expect(pm.response.json().title).to.eql('Patched'));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
       "request": {
         "method": "PATCH",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "body": { "mode": "raw", "raw": "{ \"title\": \"Patched\" }" },
-        "url": "{{baseUrl}}/posts/1"
-      }
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"title\": \"Patched\" }"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/posts/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      },
+      "response": []
     },
     {
       "name": "DELETE post",
-      "event": [{ "listen": "test", "script": { "exec": [
-        "pm.test('Status is 200', () => pm.response.to.have.status(200));"
-      ] } }],
-      "request": { "method": "DELETE", "url": "{{baseUrl}}/posts/1" }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 200', () => pm.response.to.have.status(200));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      },
+      "response": []
     },
     {
       "name": "NEGATIVE - GET missing post",
-      "event": [{ "listen": "test", "script": { "exec": [
-        "pm.test('Status is 404', () => pm.response.to.have.status(404));",
-        "pm.test('Body is empty object', () => pm.expect(pm.response.json()).to.eql({}));"
-      ] } }],
-      "request": { "method": "GET", "url": "{{baseUrl}}/posts/99999" }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 404', () => pm.response.to.have.status(404));",
+              "pm.test('Body is empty object', () => pm.expect(pm.response.json()).to.eql({}));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts/99999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "99999"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET comments for post 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const comments = pm.response.json();          // the body as a JS array\n//The status is 200.\npm.test('Status is 200', () => {\n    pm.response.to.have.status(200);\n});\n\n// It returns exactly 5 comments.\npm.test('Response returns exactly 5 records', () => pm.expect(pm.response.json()).to.have.lengthOf(5));\n\n// Every comment has postId equal to 1.\npm.test('Every comment has postId equal to 1', () => {\n  pm.response.json().forEach(p => pm.expect(p.postId).to.eql(1));\n});\n\n// Every comment’s email looks valid.\npm.test('Every comment’s email looks valid', () => {\n  pm.response.json().forEach(p => pm.expect(p.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/));\n});\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/comments?postId=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "postId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "createdPostId",
+      "value": ""
     }
   ]
 }
